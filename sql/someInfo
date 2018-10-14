@@ -1,4 +1,4 @@
-pg_dump --data-only --inserts -U Siarhei_Huba travelAgencyu > D:init_data.sql
+pg_dump --data-only --inserts -U Siarhei_Huba travelAgency > D:init_data.sql
 pg_dump -s -U Siarhei_Huba travelAgency > D:Init_schema.sql
 
 
