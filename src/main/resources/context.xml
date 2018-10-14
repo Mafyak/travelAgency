@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <context:component-scan base-package="java.*"/>
+    <bean id="userDaoImpl" class="dao.impls.UserDaoImpl"/>
+    <bean id="countryDaoImpl" class="dao.impls.CountryDaoImpl"/>
+    <bean id="hotelDaoImpl" class="dao.impls.HotelDaoImpl"/>
+    <bean id="testLogin" class="model.User"/>
+    <bean id="hotel" class="model.Hotel"/>
+
+    <!--HikariCP free data source implementation-->
+    <!--<bean id="dataSource"-->
+    <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--<property name="driverClassName" value="org.postgresql.Driver"/>-->
+    <!--<property name="url" value="jdbc:postgresql://localhost:5432/travelAgency"/>-->
+    <!--<property name="username" value="Siarhei_Huba"/>-->
+    <!--<property name="password" value="Blah123blah!"/>-->
+    <!--</bean>-->
+
+    <!--HikariCP configuration-->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="maximumPoolSize" value="10"/>
+        <property name="DataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource"/>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="databaseName">travelAgency</prop>
+                <prop key="portNumber">5432</prop>
+                <prop key="user">Siarhei_Huba</prop>
+                <prop key="password">Blah123blah!</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"></constructor-arg>
+    </bean>
+</beans>
