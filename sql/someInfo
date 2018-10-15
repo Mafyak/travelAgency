@@ -1,0 +1,18 @@
+pg_dump --data-only --inserts -U Siarhei_Huba travelAgency > D:init_data.sql
+pg_dump -s -U Siarhei_Huba travelAgency > D:Init_schema.sql
+
+
+CREATE TYPE status AS ENUM ('Notconfirmed','Coming', 'Notcoming', 'Maycome');
+
+INSERT INTO "Country" VALUES (DEFAULT, 'Armenia');
+SELECT * FROM public."Country";
+SELECT name FROM public."Country" where id=?;
+DELETE FROM public."Country" WHERE id>0;
+SELECT * FROM public."Hotel";
+
+
+
+
+INSERT INTO public."Hotel"(id, name, stars, website, lalitude, longitude, features)	
+VALUES 
+(DEFAULT, 'Hyatt Regency', 4, 'https://www.hyatt.com/en-US/hotel/illinois/', 17.319, 83.213, '{GARAGE, FREE_BREAKFAST, PET_FRIENDLY, WI_FI}');
