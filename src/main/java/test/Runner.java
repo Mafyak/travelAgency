@@ -1,6 +1,7 @@
 package test;
 
 import dao.impls.CountryDaoImpl;
+import dao.impls.HotelDaoImpl;
 import dao.impls.UserDaoImpl;
 import model.Country;
 import model.User;
@@ -20,8 +21,8 @@ public class Runner {
 //        user.setLogin("settedLogin");
 //        userDao.addText("ideaInsert", "ideaInsert2");
 //        LOG.info("User: " + user);
-        CountryDaoImpl countryDaoImpl = app.getBean(CountryDaoImpl.class);
+        HotelDaoImpl hotelDaoImpl = app.getBean(HotelDaoImpl.class);
 //        countryDaoImpl.addCountry("Armenia");
-        System.out.println(countryDaoImpl.getCountry(7));
+        System.out.println(hotelDaoImpl.getHotel(1));
     }
 }

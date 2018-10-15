@@ -16,6 +16,7 @@ public class CountryDaoImpl implements CountryDAO {
 
     private final static String ADD_COUNTRY_QUERY = "INSERT INTO \"Country\" VALUES (DEFAULT, ?)";
     private final static String GET_COUNTRY_QUERY = "SELECT id, name FROM public.\"Country\" where id=?";
+    private final static String GET_COUNTRY_QUANTITY = "SELECT count(id) FROM public.\"Country\"";
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -27,12 +28,15 @@ public class CountryDaoImpl implements CountryDAO {
         jdbcTemplate.update(ADD_COUNTRY_QUERY, country);
     }
 
+    public int countEntries() {
+        return jdbcTemplate.queryForObject(GET_COUNTRY_QUANTITY, Integer.class);
+    }
+
     public Country getCountry(int id) {
         return jdbcTemplate.queryForObject(GET_COUNTRY_QUERY, new Object[]{id}, new CountryMapper());
     }
 
     public static class CountryMapper implements RowMapper<Country> {
-
         public Country mapRow(ResultSet resultSet, int i) throws SQLException {
             Country country = new Country();
             country.setId(resultSet.getInt("id"));
